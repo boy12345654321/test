@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Ajax</title>
+		<script>
+			function load() {
+				// 1.声明一个变量，用于保存XMLHttpRequest对象
+				var xmlhttp;
+				// 判断浏览器类型
+				if (window.XMLHttpRequest) {
+					// IE7+,Firefox,Chrome,Opera,Safari浏览器
+					xmlhttp = new XMLHttpRequest();
+				} else {
+					// IE5,IE6
+					xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+				}
+				// 3.定义函数响应HTTP请求状态变化
+				xmlhttp.onreadystatechange = function () {
+					// 获取服务器返回数据
+					// readyState,0请求未初始化,1服务器连接已建立,2请求已接收,3请求处理中,4请求已完成
+					// status,200 OK,404 NOT FOUND
+					if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+						// 函数体
+						document.getElementById("info").innerHTML = xmlhttp.responseText;
+					}
+				}
+				// 2.配置HTTP请求信息
+				// xmlHttpRequest.open(method, URL, flag);
+				// method 请求方法
+				// URL 请求地址
+				// flag 异步方式,true异步（默认值）,false同步
+				xmlhttp.open("GET", "ajax.txt", true);
+				// 4.发送请求
+				// XMLHttpRequest.send(data)
+				xmlhttp.send();
+				// 对于POST请求，使用setRequestHeader()添加HTTP头，在send()中规定发送数据
+				// XMLHttpRequest.setRequestHeader(header, value)
+				// 例如，xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+				// XMLHttpRequest.send("attribute=value")
+			}
+		</script>
+	</head>
+	<body>
+		<div id="info"></div>
+		<button onclick="load()">Ajax</button>
+	</body>
+</html>

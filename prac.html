@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>倒计时按钮</title>
+	</head>
+	<body>
+		<input type="button" value="确定(10)" disabled id="btn">
+		<script>
+			// 声明一个变量，用于记录倒计时的数字
+			var time = 10;
+			// 倒计时函数
+			function change() {
+				// 倒计时数字减1
+				time--;
+				// 更新按钮上的文字
+				document.getElementById("btn").value = "确定(" + time + ")";
+				// 判断倒计时是否为0
+				if (time == 0) {
+					// 如果倒计时为0，更新按钮文字
+					document.getElementById("btn").value = "确定";
+					// 按钮变为可用（删除disabled属性节点）
+					// document.getElementById("btn").removeAttribute("disabled");
+					document.getElementById("btn").disabled = false;
+					// 停止循环延迟执行过程
+					clearInterval(timer);
+				}
+			}
+			// 循环延迟执行
+			var timer = setInterval("change()", 1000);
+		</script>
+	</body>
+</html>
